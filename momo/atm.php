@@ -36,9 +36,9 @@ $ipnUrl = "http://localhost:86/full/shopping-cart.php";
 $extraData = "";
 
 
-
     $requestId = time() . "";
     $requestType = "payWithATM";
+    $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
     //before sign HMAC SHA256 signature
     $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
     $signature = hash_hmac("sha256", $rawHash, $secretKey);
@@ -57,6 +57,9 @@ $extraData = "";
         'signature' => $signature);
     $result = execPostRequest($endpoint, json_encode($data));
     $jsonResult = json_decode($result, true);  // decode json
+
+    //Just a example, please check more in there
+
     header('Location: ' . $jsonResult['payUrl']);
 ?>
 <!DOCTYPE html>

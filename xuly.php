@@ -17,7 +17,7 @@ function generateUniqueID() {
 
 if(isset($_POST['Them'])){
     $id = generateUniqueID();
-    $sql_them1 = "INSERT INTO nguoidung(`id`, `taikhoan`, `matkhau`) VALUES ('$id','".$taikhoan."', '".$matkhau."')";
+    $sql_them1 = "INSERT INTO nguoidung(`id`, `taikhoan`, `matkhau`,`hoTen` ) VALUES ('$id','".$taikhoan."', '".$matkhau."', '".$hoten."')";
     mysqli_query($mysqli,$sql_them1);
     echo '<script>alert("Đăng Ký Thành Công"); window.location.href = "sign-in.php";</script>';
 }

@@ -5,8 +5,7 @@ $row_sua = mysqli_query($mysqli,$sql_lietke);
 <style>
 .centers{
   position: relative;
-  left: 347px;
-  top: -190px;
+  left: 500px;
 }
 </style>
 <body>

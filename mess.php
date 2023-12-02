@@ -1,13 +1,15 @@
 <a href="https://web.facebook.com/profile.php?id=61550640840851" class="fixed-image">
-  <img src="assets/images/products/images.png" width="80px">
+  <img src="assets/images/fb.png" width="70px">
 </a>
 
 <style>
   .fixed-image {
     position: fixed;
-    left: 1425px;
-    top: 655px;
+    float :bottom;
+    top: 670px;
+    left: 10px;
     z-index: 9999;
+    float: left;
   }
   .fixed-image img{
     border-radius:200px;

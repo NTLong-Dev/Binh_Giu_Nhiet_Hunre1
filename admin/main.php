@@ -1,5 +1,4 @@
 <?php
-include("danhmuc/them.php");
 include("danhmuc/lietke.php");
 if(isset($_GET['query'])){
     $query = $_GET['query'];
@@ -8,5 +7,7 @@ if(isset($_GET['query'])){
 }
 if($query == 'sua'){
     include("danhmuc/sua.php");
+}elseif($query == 'them'){
+    include("danhmuc/them.php");
 }
 ?>

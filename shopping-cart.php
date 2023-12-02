@@ -14,6 +14,7 @@ if (isset($_GET['id']) && isset($_GET['query']) && $_GET['query'] == 'themgiohan
     $product = mysqli_fetch_assoc($result);
     // Lưu thông tin sản phẩm vào mảng trong biến session
     $_SESSION['gioHang'][$_SESSION['taikhoan']][] = array(
+        'id' => $product['id'],
         'hinhanh' => $product['HinhAnh'],
         'tenDanhMuc' => $product['Ten_Danh_Muc'],
         'giaTien' => $product['GiaTien']
@@ -111,7 +112,7 @@ if ($taikhoan !== "Guest") {
                                                     <tbody>
                                                         <tr>
                                                             <td class="cart-image">
-                                                                <a class="entry-thumbnail"style="cursor:auto; ">
+                                                                <a class="entry-thumbnail" style="cursor:auto;">
                                                                     <img src="assets/images/products/<?php echo $sanPham['hinhanh']; ?>" alt="">
                                                                 </a>
                                                             </td>
@@ -120,7 +121,7 @@ if ($taikhoan !== "Guest") {
                                                                 <div class="cart-product-info">
                                                                     <td style="position:relative; left: -275px;"><p><?php echo $sanPham['giaTien']; ?>đ</p></td>
                                                                 </div>
-                                                                <td class="romove-item" style="position:relative; left: -120px;"><a href="xoa.php?query=xoagiohang "title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
+                                                                <td class="romove-item" style="position:relative; left: -120px;"><a href="xoa-sanpham.php" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
                                                             </td>
                                                         </tr>
                                                     <?php } ?>
@@ -141,13 +142,26 @@ if ($taikhoan !== "Guest") {
                                     <tbody>
                                         <tr>
                                             <td>
+                                                <form action="donhang.php" method="POST">
                                                 <div class="form-group">
                                                     <label class="info-title control-label">Nhập Địa Chỉ Cụ Thể<span>*</span></label>
-                                                    <input type="text" class="form-control unicase-form-control text-input" placeholder="" require name="diachi">
+                                                    <input type="text" class="form-control unicase-form-control text-input" name="diachi">
                                                 </div>
                                                 <div class="pull-right">
-                                                    <button type="submit" class="btn-upper btn btn-primary">OK</button>
+                                                    <?php  if (isset($_SESSION['gioHang'][$taikhoan]) && !empty($_SESSION['gioHang'][$taikhoan])) { ?>
+                                                        <?php
+                                                    if(isset($_GET['partnerCode'])){
+                                                        $thanhtoan = 'Thanh Toán Online';
+                                                    } else {
+                                                        $thanhtoan = 'Thanh Toán Khi Nhận Hàng';
+                                                    }
+                                                    ?>
+                                                    <input type="hidden" name="thanhtoan" value="<?php echo $thanhtoan; ?>">
+                                                 
+                                                <button type="submit" class="btn btn-primary checkout-btn "style="position: relative; left: 650px; top: -70px; z-index: 999">Thanh Toán</button>
                                                 </div>
+                                                <?php }?>
+                                                </form>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -173,6 +187,7 @@ if ($taikhoan !== "Guest") {
                                                     }
                                                     ?>">
                                                     <?php
+                       
                                                     if (isset($_SESSION['gioHang'][$taikhoan]) && !empty($_SESSION['gioHang'][$taikhoan])) { ?>
                                             <input type="submit" value="Thanh Toán Online"  class="btn-upper btn btn-primary" require>
                                         </form>
@@ -219,9 +234,9 @@ if ($taikhoan !== "Guest") {
                                                     
                                                     </table>
                                                     <?php
-                                                    if (isset($_SESSION['gioHang'][$taikhoan]) && !empty($_SESSION['gioHang'][$taikhoan])) { ?>
-                                                   <a href="donhang.php?query=themdonhang"><button type="submit" class="btn btn-primary checkout-btn "style="position: relative; left: -100px;">Thanh Toán</button></a>
 
+                                                    if (isset($_SESSION['gioHang'][$taikhoan]) && !empty($_SESSION['gioHang'][$taikhoan])) { ?>
+                                                    <a href="donhang.php?query=themdonhang" style="display: none;"></a>
                                                    <?php } else {
                                                         echo "Không có đơn hàng để thanh toán";
                                                     }

@@ -264,7 +264,7 @@ a {
 }
 #owl-main:hover .owl-prev:hover,
 #owl-main:hover .owl-next:hover {
-  background: #0f6cb2;
+  background: #fdd922;
   color:#fff!important
 }
 #owl-main:hover .owl-prev:hover .icon,
@@ -274,7 +274,7 @@ a {
 
 #owl-main .owl-controls .owl-pagination .owl-page:active span,
 #owl-main .owl-controls .owl-pagination .owl-page:hover span {
-  background: #0f6cb2;
+  background: #fdd922;
 }
 .cart .action ul .lnk .add-to-cart:hover,
 .cart .action ul .lnk .add-to-cart:focus {

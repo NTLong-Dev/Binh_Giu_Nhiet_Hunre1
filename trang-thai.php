@@ -4,7 +4,11 @@ include('admin/config/Db.php');
 
 if (isset($_SESSION['taikhoan'])) {
     $taikhoan = $_SESSION['taikhoan'];
-    $sql_lietke = "SELECT * FROM donhang WHERE nguoidat = '".$taikhoan."' ORDER BY id ASC";
+    $sql_lietke1 = "SELECT hoTen FROM nguoidung WHERE taiKhoan = '".$_SESSION['taikhoan']."'";
+    $row_liet_ke1 = mysqli_query($mysqli, $sql_lietke1);
+    $rowst = mysqli_fetch_array($row_liet_ke1);
+    $hoTen = $rowst['hoTen'];
+    $sql_lietke = "SELECT * FROM donhang WHERE nguoidat = '".$hoTen."' ORDER BY id ASC";
     $row_liet_ke = mysqli_query($mysqli,$sql_lietke); 
 } else {
     $taikhoan = "Guest";
@@ -72,6 +76,8 @@ if ($taikhoan !== "Guest") {
                                                 <th class="cart-description item">Mã Đơn</th>
                                                 <th class="cart-edit item">Sản Phẩm</th>
                                                 <th class="cart-edit item">Người Đặt Hàng</th>
+                                                <th class="cart-edit item">Địa Chỉ</th>
+                                                <th class="cart-edit item">Hình Thức Thanh Toán</th>
                                                 <th class="cart-edit item">Trạng Thái</th>
                                             </tr>
                                         </thead><!-- /thead -->
@@ -79,7 +85,7 @@ if ($taikhoan !== "Guest") {
                                             <style>
                                                 td{
                                                     position: relative;
-                                                    left: 30px;
+                                                    left: 20px;
                                                 }
                                             </style>
                                         <?php
@@ -87,20 +93,26 @@ if ($taikhoan !== "Guest") {
                                             
                                         ?>
                                                     <tbody>
-                                                        <tr>
-                                                            <div class="cart-product-name-info">
-                                                                <td><p id =><?php echo $rows['id'] ?></p></td> </div>
+                                                        <tr style="position: relative; left: 0px;">
+                                                            <div class="cart-product-name-info" >
+                                                                <td style="position: relative; left: 4px;"><p id =><?php echo $rows['id'] ?></p></td> </div>
                                                                 <div class="cart-product-info">
-                                                                    <td><p><?php echo $rows['madon'] ?></p></td>
+                                                                    <td style="position: relative; left: 0px;"><p><?php echo $rows['madon'] ?></p></td>
                                                                 </div>
                                                                 <div class="cart-product-info">
-                                                                    <td style="position: relative; left: 45px;"><p><?php echo $rows['SanPham'] ?></p></td>
+                                                                    <td><p><?php echo $rows['SanPham'] ?></p></td>
                                                                 </div>
                                                                 <div class="cart-product-info">
-                                                                    <td style="position: relative; left: 50px;"><p><?php echo $rows['nguoidat'] ?></p></td>
+                                                                    <td ><p><?php echo $rows['nguoidat'] ?></p></td>
                                                                 </div>
                                                                 <div class="cart-product-info">
-                                                                    <td style="position: relative; left: 70px;"><p><?php if($rows['trangthai'] == "Duyệt"){
+                                                                    <td style="position: relative; left: 20px;"><p><?php echo $rows['diaChi'] ?></p></td>
+                                                                </div>
+                                                                <div class="cart-product-info">
+                                                                    <td style="position: relative; left: 20px;"><p><?php echo $rows['hinhThuc'] ?></p></td>
+                                                                </div>
+                                                                <div class="cart-product-info">
+                                                                    <td><p><?php if($rows['trangthai'] == "Duyệt"){
                                                                         echo "Đơn Hàng Đã Được Duyệt";
                                                                     }else{
                                                                         echo "Đơn Hàng Đang Chờ Duyệt";

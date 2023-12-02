@@ -2,6 +2,8 @@
 include("admin\config\Db.php");
 $sql_lietke = "SELECT * FROM danhmuc ORDER BY id ASC";
 $row_liet_ke = mysqli_query($mysqli,$sql_lietke);
+$sql_lks = "SELECT DanhMuc FROM danhmuc";
+$row_lks = mysqli_query($mysqli, $sql_lks);
 ?>
 
 <!DOCTYPE html>
@@ -68,31 +70,22 @@ include("header.php");
 	<div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Danh Mục</div>
 	<nav class="yamm megamenu-horizontal">
 	<ul class="nav">
-              <li class="dropdown menu-item"> <a href="danhmuc.php?category=Bình Nhựa" class="dropdown-toggle">Bình Nhựa</a>
-                <!-- /.dropdown-menu --> </li>
-              <!-- /.menu-item -->
-              
-              <li class="dropdown menu-item"> <a href="danhmuc.php?category=Bình Nắp Bật" class="dropdown-toggle">Bình Nắp Bật</a> 
-                <!-- ================================== MEGAMENU VERTICAL ================================== -->
-                <!-- /.dropdown-menu --> </li>
-              <!-- /.menu-item -->
-              
-              <li class="dropdown menu-item"> <a href="danhmuc.php?category=Bình Nắp Bật Led" class="dropdown-toggle" >Bình Nắp Bật Led</a>
-              
-                <!-- /.dropdown-menu --> </li>
-              <!-- /.menu-item -->
-              
-              <li class="dropdown menu-item"> <a href="danhmuc.php?category=Cốc Cafe" class="dropdown-toggle" >Cốc Cafe</a>
-                <!-- /.dropdown-menu --> </li>
-              <!-- /.menu-item -->
-              
-              <li class="dropdown menu-item"> <a href="danhmuc.php?category=Cốc Patel" class="dropdown-toggle">Cốc Patel</a>
-                <!-- /.dropdown-menu --> </li>
-                <li class="dropdown menu-item"> <a href="danhmuc.php?category=Bình Sport" class="dropdown-toggle" >Bình Sport</a>
-                  <!-- /.dropdown-menu --> </li>
-                  <li class="dropdown menu-item"> <a href="danhmuc.php?category=Bình ULike" class="dropdown-toggle" >Bình ULike</a>
-                    <!-- /.dropdown-menu --> </li>
-              <!-- /.menu-item -->
+	<?php
+$categories = array();
+while($roaw = mysqli_fetch_array($row_lks)){
+    $category = $roaw['DanhMuc'];
+    if(!in_array($category, $categories)){
+        $categories[] = $category;
+        ?>
+        <li class="dropdown menu-item">
+            <a href="danhmuc.php?category=<?php echo $category ?>" class="dropdown-toggle">
+                <?php echo $category ?>
+            </a>
+        </li>
+        <?php
+    }
+}
+?>
             </ul>
 	  <!-- /.nav --> 
 	</nav>
@@ -264,16 +257,20 @@ include("header.php");
 					<div class="row">
 						<div class="col-sm-3">
 							<ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
-								<li class="active"><a data-toggle="tab" href="#description">Mô Tả</a></li>
+								<li class="active"><a data-toggle="tab" href="#description">Mô Tả</a>
+								
 								<li><a data-toggle="tab" href="#review">REVIEW</a></li>
 							</ul><!-- /.nav-tabs #product-tabs -->
 						</div>
 						<div class="col-sm-9">
-
+						
 							<div class="tab-content">
-								
+							
 								<div id="description" class="tab-pane in active">
 									<div class="product-tab">
+									<p class="text">
+											Bình Nhựa Thể Thao Đeo Chéo Thể Tích 1L6 N261 thích hợp làm bình đựng nước thể thao mang đi tập gym! Bình nước tập gym này sẽ là 1 phần không thể thiếu của các gymers. Khách thường thắc mắc mua bình đựng nước thể thao ở đâu tphcm? Thế Giới Bình Nước tự hào là đơn vị chuyên cung cấp các bình nước tập gym, bình nước BPA FREE thể thao, bình nước xe đạp giá cả phải chăng lại vô cùng chất lượng. Bình Nước Thể Thao 2 lít nhiều khi cũng được các phượt thủ dùng làm bình nước phượt hay bình nước du lịch mỗi khi đi đâu xa. 
+										</p>
 									</div>	
 								</div><!-- /.tab-pane -->
 

@@ -13,6 +13,8 @@ if(isset($_POST['timkiem'])){
   $sql_lietke = "SELECT * FROM danhmuc ORDER BY id ASC";
   $row_liet_ke = mysqli_query($mysqli, $sql_lietke);
 }
+$sql_lks = "SELECT DanhMuc FROM danhmuc";
+$row_lks = mysqli_query($mysqli, $sql_lks); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,30 +67,22 @@ include("header.php");
           <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Danh Mục</div>
           <nav class="yamm megamenu-horizontal">
             <ul class="nav">
-              <li class="dropdown menu-item"> <a href="danhmuc.php?category=Bình Nhựa" class="dropdown-toggle">Bình Nhựa</a>
-                <!-- /.dropdown-menu --> </li>
-              <!-- /.menu-item -->
-              
-              <li class="dropdown menu-item"> <a href="danhmuc.php?category=Bình Nắp Bật" class="dropdown-toggle">Bình Nắp Bật</a> 
-                <!-- ================================== MEGAMENU VERTICAL ================================== -->
-                <!-- /.dropdown-menu --> </li>
-              <!-- /.menu-item -->
-              
-              <li class="dropdown menu-item"> <a href="danhmuc.php?category=Bình Nắp Bật Led" class="dropdown-toggle" >Bình Nắp Bật Led</a>
-              
-                <!-- /.dropdown-menu --> </li>
-              <!-- /.menu-item -->
-              
-              <li class="dropdown menu-item"> <a href="danhmuc.php?category=Cốc Cafe" class="dropdown-toggle" >Cốc Cafe</a>
-                <!-- /.dropdown-menu --> </li>
-              <!-- /.menu-item -->
-              
-              <li class="dropdown menu-item"> <a href="danhmuc.php?category=Cốc Patel" class="dropdown-toggle">Cốc Patel</a>
-                <!-- /.dropdown-menu --> </li>
-                <li class="dropdown menu-item"> <a href="danhmuc.php?category=Bình Sport" class="dropdown-toggle" >Bình Sport</a>
-                  <!-- /.dropdown-menu --> </li>
-                  <li class="dropdown menu-item"> <a href="danhmuc.php?category=Bình ULike" class="dropdown-toggle" >Bình ULike</a>
-                    <!-- /.dropdown-menu --> </li>
+            <?php
+$categories = array();
+while($roaw = mysqli_fetch_array($row_lks)){
+    $category = $roaw['DanhMuc'];
+    if(!in_array($category, $categories)){
+        $categories[] = $category;
+        ?>
+        <li class="dropdown menu-item">
+            <a href="danhmuc.php?category=<?php echo $category ?>" class="dropdown-toggle">
+                <?php echo $category ?>
+            </a>
+        </li>
+        <?php
+    }
+}
+?>
               <!-- /.menu-item -->
             </ul>
             <!-- /.nav --> 

@@ -1,4 +1,3 @@
-<p>Thêm Danh Mục</p>
 <style>
 table, th, td {  border:3px solid gray;
   background-color: white;
@@ -7,20 +6,16 @@ table, th, td {  border:3px solid gray;
   position: relative;
   left: 320px;
 }
-.hien{
-  color: gray;
-
-}
 .tb{
   position: relative;
   top: 10px;
   text-align: center;
 }
-
 </style>
 <body>
 
 <form action="danhmuc/xuly.php" method="post">
+  <div class ="them">
 <section id="main-content" >
 	<section class="wrapper">
 							<table class="table stats-table center" style="width:50%">     
@@ -39,6 +34,7 @@ table, th, td {  border:3px solid gray;
     <tr><th>Xử Lý</th>
     <td ><input type="submit" value ="Thêm" style="width: 200px;" name="Them">
 							</table>
+              </div>
 </section>
 </form>
 </table>

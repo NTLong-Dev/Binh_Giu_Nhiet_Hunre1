@@ -36,7 +36,7 @@ table, th, td {  border:3px solid gray;
   <td><?php echo $rows['id'] ?></td>
     <td><?php echo $rows['taikhoan'] ?></td>
     <td><?php echo $rows['matkhau'] ?></td>
-    <td><a href="xuly.php?id=<?php echo $rows['id'] ?>&query=xoa">Xoá</a></td>
+    <td><a href="xuly.php?id=<?php echo $rows['id'] ?>&query=xoa" onclick="return confirm('Bạn có chắc chắn muốn xoá không?')">Xoá</a></td>
     <?php
     }?>
 

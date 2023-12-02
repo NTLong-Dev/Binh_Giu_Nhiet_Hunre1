@@ -36,12 +36,24 @@ function madonUniqueID() {
     return $madonID;
 }
 if (isset($_SESSION['gioHang'][$taikhoan]) && is_array($_SESSION['gioHang'][$taikhoan])) {
+    $diaChi = $_POST['diachi'];
+    if(!empty($diaChi)){
     foreach ($_SESSION['gioHang'][$taikhoan] as $sanPham) {
         unset($_SESSION['gioHang'][$taikhoan]);
         $id = generateUniqueID();
         $madon = madonUniqueID();
-        $sql_them = "INSERT INTO donhang(`id`, `madon`, `SanPham`, `nguoidat`, `trangthai`) VALUES ('".$id."', '".$madon."', '".$sanPham['tenDanhMuc']."', '".$_SESSION['taikhoan']."', 'Không')";
+        $sql_lietke1 = "SELECT hoTen FROM nguoidung WHERE taiKhoan = '".$_SESSION['taikhoan']."'";
+        $row_liet_ke1 = mysqli_query($mysqli, $sql_lietke1);
+        $rowst = mysqli_fetch_array($row_liet_ke1);
+        $hoTen = $rowst['hoTen'];
+        $diaChi = $_POST['diachi'];
+        $thanhtoan = $_POST['thanhtoan'];
+        $sql_them = "INSERT INTO donhang(`id`, `madon`, `SanPham`, `nguoidat`, `diaChi`,`hinhThuc`,`trangthai`) VALUES ('".$id."', '".$madon."', '".$sanPham['tenDanhMuc']."', '".$hoTen."','$diaChi','$thanhtoan', 'Không')";
         mysqli_query($mysqli,$sql_them);
         echo '<script>alert("Đã Đặt Đơn Hàng Thành Công! Chờ Xét Duyệt Và Giao Hàng"); window.location.href = "shopping-cart.php";</script>';
-    }}
+    }
+        }else{
+        echo '<script>alert("Bạn Chưa Điền Địa Chỉ"); window.location.href = "shopping-cart.php";</script>';
+}
+}
 ?>
